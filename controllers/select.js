@@ -10,6 +10,8 @@ const getSelect = async (req, res) => {
   const sid = req.query.sid;
   const type = req.query.type;
   const data = await selectQuery.getSelect(sid);
+  const multiSelect = req.query.multiSelect || "";
+  console.log(multiSelect);
 
   console.log(type);
 
@@ -33,7 +35,7 @@ const getSelect = async (req, res) => {
 
   if (type == "select") {
     var select = "";
-    select += `<select name="select">`;
+    select += `<select name="select" ${multiSelect}>`;
     for (var i = 0; i < data.length; i++) {
       select += `<option value="${data[i].option_value}">${data[i].option_value}</option>`;
     }
@@ -43,7 +45,6 @@ const getSelect = async (req, res) => {
   }
 };
 
-
 const getSelectedOption = async (req, res) => {
   const sid = req.query.sid;
   console.log(sid);
@@ -51,8 +52,15 @@ const getSelectedOption = async (req, res) => {
   res.json(data);
 };
 
+const deleteSelect = async (req, res) => {
+  const sid = req.query.sid;
+  const data = await selectQuery.deleteSelect(sid);
+  res.json(data);
+};
+
 module.exports = {
   addSelectName,
   getSelect,
   getSelectedOption,
+  deleteSelect,
 };

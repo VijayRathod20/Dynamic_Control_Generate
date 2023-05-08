@@ -11,4 +11,10 @@ router.get("/getSelect", selectController.getSelect);
 
 router.get("/getSelectedOption", selectController.getSelectedOption);
 
+router.put("/updateOption", optionController.updateOptionValue);
+
+router.delete("/deleteOption", optionController.deleteOptionValue);
+
+router.delete("/deleteSelect", selectController.deleteSelect);
+
 module.exports = router;

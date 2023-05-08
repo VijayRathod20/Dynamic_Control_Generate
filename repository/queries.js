@@ -30,9 +30,45 @@ const getSelectedOption = async (sid) => {
   return result;
 };
 
+const updateOption = async (options, option_value) => {
+  const result = await optionMaster.update(options, {
+    where: {
+      option_value: option_value,
+    },
+  });
+  return result;
+};
+
+const deleteOption = async (option_value) => {
+  const result = await optionMaster.destroy({
+    where: {
+      option_value: option_value,
+    },
+  });
+  return result;
+};
+
+const deleteSelect = async (sid) => {
+  try {
+    const result = await selectMaster.destroy({
+      where: {
+        id: sid,
+      },
+    });
+    return result;
+  } catch (error) {
+    if (error.name === "SequelizeForeignKeyConstraintError") {
+      return "Delete option first";
+    }
+  }
+};
+
 module.exports = {
   insertSelect,
   insertOption,
   getSelect,
   getSelectedOption,
+  updateOption,
+  deleteOption,
+  deleteSelect,
 };

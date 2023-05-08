@@ -48,8 +48,42 @@ const getSelect = async (req, res) => {
 const getSelectedOption = async (req, res) => {
   const sid = req.query.sid;
   console.log(sid);
+  const type = req.query.type;
   const data = await selectQuery.getSelectedOption(sid);
-  res.json(data);
+  const multiSelect = req.query.multiSelect || "";
+  // res.json(data);
+
+  if (type == "radio") {
+    var radio = "";
+    radio += `<label>Select ${data.select_name} :- </label>`;
+    for (var i = 0; i < data.option_masters.length; i++) {
+      radio += `<input type="radio" name="radio" value="${data.option_masters[i].option_value}" /> ${data.option_masters[i].option_value}`;
+    }
+    console.log(radio);
+    res.send(radio);
+  }
+
+  if (type == "checkbox") {
+    var checkbox = "";
+    checkbox += `<label>Select ${data.select_name} :- </label>`;
+    for (var i = 0; i < data.option_masters.length; i++) {
+      checkbox += `<input type="checkbox" name="checkbox" value="${data.option_masters[i].option_value}" /> ${data.option_masters[i].option_value}`;
+    }
+    console.log(checkbox);
+    res.send(checkbox);
+  }
+
+  if (type == "select") {
+    var select = "";
+    select += `<label>Select ${data.select_name} :- </label>`;
+    select += `<select name="select" ${multiSelect}>`;
+    for (var i = 0; i < data.option_masters.length; i++) {
+      select += `<option value="${data.option_masters[i].option_value}">${data.option_masters[i].option_value}</option>`;
+    }
+    select += `</select>`;
+    console.log(select);
+    res.send(select);
+  }
 };
 
 const deleteSelect = async (req, res) => {

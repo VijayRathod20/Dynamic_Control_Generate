@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DYnamic Controls</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input {
+            margin: 0.4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h1>Dynamic Controls</h1>
+            <h2>type : <%= type %>
+            </h2>
+            <%if (type=='dropDown' ) {%>
+                <select name="dropDown" id="dropDown">
+                    <%for (let i=0; i < data.length; i++) {%>
+                        <option value="<%=data[i].option_value%>">
+                            <%=data[i].option_value%>
+                        </option>
+                        <%}%>
+                </select>
+                <%}%>
+
+                    <%if (type=='radio' ) {%>
+                        <%for (let i=0; i < data.length; i++) {%>
+                            <div>
+                                <input type="radio" id="<%=data[i].option_value%>" name="radio"
+                                    value="<%=data[i].option_value%>" />
+                                <label for="<%=data[i].option_value%>">
+                                    <%=data[i].option_value%>
+                                </label>
+                            </div>
+                            <%}%>
+                                <%}%>
+
+                                    <% if(type=='checkbox' ) {%>
+                                        <div>
+                                            <%for (let i=0; i < data.length; i++) {%>
+
+                                                <input type="checkbox" id="<%=data[i].option_value%>"
+                                                    name="<%=data[i].option_value%>" value="<%=data[i].option_value%>">
+                                                <label for="<%=data[i].option_value%>">
+                                                    <%=data[i].option_value%>
+                                                </label><br>
+
+                                                <%}%>
+                                        </div>
+
+                                        <%}%>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

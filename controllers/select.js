@@ -1,4 +1,6 @@
 const selectQuery = require("../repository/queries");
+const userModel = require("../models").user;
+console.log(userModel);
 
 const addSelectName = async (req, res) => {
   const select_name = req.body;
@@ -47,11 +49,38 @@ const getSelect = async (req, res) => {
 
 const getSelectedOption = async (req, res) => {
   const sid = req.query.sid;
-  console.log(sid);
+  console.log("sid", sid);
   const type = req.query.type;
   const data = await selectQuery.getSelectedOption(sid);
   const multiSelect = req.query.multiSelect || "";
   // res.json(data);
+
+  if (sid == 4) {
+    const data2 = await userModel.findAll();
+    if (type == "select") {
+      var select = "";
+      select += `<select name="select" ${multiSelect}>`;
+      for (var i = 0; i < data2.length; i++) {
+        select += `<option value="${data2[i].name}">${data2[i].name}</option>`;
+      }
+      select += `</select>`;
+      return res.send(select);
+    }
+    if (type == "radio") {
+      var radio = "";
+      for (var i = 0; i < data2.length; i++) {
+        radio += `<input type="radio" name="radio" value="${data2[i].name}" /> ${data2[i].name}</br>`;
+      }
+      return res.send(radio);
+    }
+    if (type == "checkbox") {
+      var checkbox = "";
+      for (var i = 0; i < data2.length; i++) {
+        checkbox += `<input type="checkbox" name="checkbox" value="${data2[i].name}" /> ${data2[i].name}</br>`;
+      }
+      return res.send(checkbox);
+    }
+  }
 
   if (type == "radio") {
     var radio = "";

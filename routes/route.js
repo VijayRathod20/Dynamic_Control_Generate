@@ -19,4 +19,8 @@ router.delete("/deleteSelect", selectController.deleteSelect);
 
 router.get("/google_form", (req, res) => res.render("google-form"));
 
+router.post("/generate_form", selectController.createForm);
+
+router.get("/get_form", selectController.getForm);
+
 module.exports = router;

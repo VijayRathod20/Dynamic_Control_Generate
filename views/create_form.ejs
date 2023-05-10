@@ -6,10 +6,222 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=\, initial-scale=1.0">
     <title>Create Form</title>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .wrapper {
+            margin: 10px;
+        }
+
+        input {
+            width: 100%;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        label {
+            margin: 10px;
+        }
+
+        select {
+            width: 100%;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        button {
+            width: 20%;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+    </style>
+
 </head>
 
 <body>
-    
+
+    <div class="container">
+        <h1>Generate Form</h1>
+        <form action="/create-form" method="POST">
+            <div class="wrapper">
+                <label for="name">Enter Form Name</label>
+                <input type="text" name="name" placeholder="Enter Form Name">
+            </div>
+            <div class="wrapper">
+                <div id="fields">
+                    <div>
+                        <label for="fields">Enter Field Name</label>
+                        <select name="selectFields" id="selectFields" onchange="addAttributes()">
+                            <option disabled selected hidden>Select Field</option>
+                            <option value="text">Text</option>
+                            <option value="radio">Radio</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="select">Select</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
 </body>
+<script>
+
+    const fields = document.getElementById('fields');
+    const addAttributes = () => {
+        const selectFields = document.getElementById('selectFields').value;
+        console.log(selectFields);
+
+        if (selectFields == "text") {
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "text");
+            input.setAttribute("placeholder", "this is text input");
+            input.setAttribute("disabled", "true");
+            fields.appendChild(input);
+            var button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "addProperties()");
+            button.innerHTML = "addProperties";
+            fields.appendChild(button);
+        }
+
+        if (selectFields == "radio") {
+            var input = document.createElement("input");
+            input.setAttribute("type", "radio");
+            input.setAttribute("name", "radio");
+            input.setAttribute("placeholder", "this is radio input");
+            input.setAttribute("disabled", "true");
+            fields.appendChild(input);
+            var button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "addProperties()");
+            button.innerHTML = "addProperties";
+            fields.appendChild(button);
+        }
+
+        if (selectFields == "checkbox") {
+            var input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("name", "checkbox");
+            input.setAttribute("placeholder", "this is checkbox input");
+            input.setAttribute("disabled", "true");
+            fields.appendChild(input);
+            var button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "addProperties()");
+            button.innerHTML = "addProperties";
+            fields.appendChild(button);
+        }
+
+        if (selectFields == "select") {
+            var input = document.createElement("select");
+            input.setAttribute("name", "select");
+            input.setAttribute("placeholder", "this is select input");
+            input.setAttribute("disabled", "true");
+            fields.appendChild(input);
+            var button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "addProperties()");
+            button.innerHTML = "addProperties";
+            fields.appendChild(button);
+        }
+    }
+
+    const addProperties = () => {
+        var select = document.createElement("select");
+        select.setAttribute("name", "selectTextProperty");
+        select.setAttribute("id", "selectTextProperty");
+        select.setAttribute("onchange", "addTextProperties()");
+        var option = document.createElement("option");
+        option.setAttribute("value", "select");
+        option.setAttribute("disabled", "true");
+        option.setAttribute("selected", "true");
+        option.setAttribute("hidden", "true");
+        select.appendChild(option);
+        option.innerHTML = "select";
+        var option = document.createElement("option");
+        option.setAttribute("value", "name");
+        option.innerHTML = "name";
+        select.appendChild(option);
+        var option = document.createElement("option");
+        option.setAttribute("value", "label");
+        option.innerHTML = "label";
+        select.appendChild(option);
+        var option = document.createElement("option");
+        option.setAttribute("value", "options");
+        option.innerHTML = "options";
+        select.appendChild(option);
+        fields.appendChild(select);
+
+
+    }
+
+    const addTextProperties = () => {
+        var selectTextProperty = document.getElementById('selectTextProperty').value;
+        console.log(selectTextProperty);
+        if (selectTextProperty == "name") {
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "textName");
+            input.setAttribute("placeholder", "Enter Name of the textfield");
+            fields.appendChild(input);
+
+        }
+        if (selectTextProperty == "label") {
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "textLabel");
+            input.setAttribute("placeholder", "Enter Label of the textfield");
+            fields.appendChild(input);
+        }
+        if (selectTextProperty == "options") {
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "textOptions");
+            input.setAttribute("placeholder", "Enter Options of the textfield");
+            fields.appendChild(input);
+            var button = document.createElement("button");
+            button.setAttribute("type", "button");
+            button.setAttribute("onclick", "addOptions()");
+            button.innerHTML = "addOptions";
+            fields.appendChild(button);
+        }
+    }
+    const addOptions = () => {
+        var input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("name", "textOptions");
+        input.setAttribute("placeholder", "Enter Options of the textfield");
+        fields.appendChild(input);
+        var button = document.createElement("button");
+        button.setAttribute("type", "button");
+        button.setAttribute("onclick", "addOptions()");
+        button.innerHTML = "addOptions";
+        fields.appendChild(button);
+    }
+
+</script>
 
 </html>

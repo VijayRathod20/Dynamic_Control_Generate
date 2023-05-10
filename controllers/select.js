@@ -172,9 +172,7 @@ const createForm = async (req, res) => {
 };
 
 const getForm = async (req, res) => {
-  const data = await Form.findAll();
-
-  res.json(data[0]);
+  res.render("create_form");
 };
 
 module.exports = {

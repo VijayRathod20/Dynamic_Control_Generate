@@ -17,4 +17,6 @@ router.delete("/deleteOption", optionController.deleteOptionValue);
 
 router.delete("/deleteSelect", selectController.deleteSelect);
 
+router.get("/google_form", (req, res) => res.render("google-form"));
+
 module.exports = router;

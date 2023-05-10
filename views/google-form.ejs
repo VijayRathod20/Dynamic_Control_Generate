@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoogleForm
+    </title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #select {
+            width: 200px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        #form {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 200px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        #googleForm {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generate Form</h1>
+        <label for="select">Select Component to generate </label>
+        <form action="get">
+            <select id="select" name="select" onchange="getSelect()">
+                <option value="label" hidden disabled selected value>select</option>
+                <option value="input">Input box</option>
+                <option value="radio">Radio Button</option>
+                <option value="select">Drop Down</option>
+                <option value="checkbox">Checkbox</option>
+                <option value="submit">Submit Button</option>
+            </select>
+        </form>
+    </div>
+    <div class="form" id="form">
+        <form action="get" id="googleForm">
+
+        </form>
+    </div>
+</body>
+<script>
+    function getSelect() {
+        var select = document.getElementById("select");
+        var value = select.options[select.selectedIndex].value;
+
+        const Form = document.getElementById("googleForm");
+        if (value == 'select') {
+
+            var selected = document.createElement("select");
+            selected.setAttribute("id", "select");
+            selected.setAttribute("name", "select");
+            Form.appendChild(selected);
+
+            var option = document.createElement("option");
+            option.setAttribute("value", "select");
+            option.setAttribute("hidden", "hidden");
+            option.setAttribute("disabled", "disabled");
+            option.setAttribute("selected", "selected");
+            option.innerHTML = "select";
+            var br = document.createElement("br");
+            selected.appendChild(option);
+
+
+        }
+
+        if (value == 'input') {
+            var input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("id", "input");
+            input.setAttribute("name", "input");
+            input.setAttribute("placeholder", "Enter Inputs");
+            Form.appendChild(input);
+        }
+
+        if (value == 'radio') {
+            var radio = document.createElement("input");
+            radio.setAttribute("type", "radio");
+            radio.setAttribute("id", "radio");
+            radio.setAttribute("name", "radio");
+            radio.setAttribute("value", "radio");
+            var label = document.createElement("label");
+            label.setAttribute("for", "radio");
+            label.innerHTML = "Radio Button";
+            Form.appendChild(label);
+            Form.appendChild(radio);
+        }
+
+        if (value == 'checkbox') {
+            var checkbox = document.createElement("input");
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.setAttribute("id", "checkbox");
+            checkbox.setAttribute("name", "checkbox");
+            checkbox.setAttribute("value", "checkbox");
+            var label = document.createElement("label");
+            label.setAttribute("for", "checkbox");
+            label.innerHTML = "Checkbox";
+            Form.appendChild(label);
+            Form.appendChild(checkbox);
+            var br = document.createElement("br");
+            Form.appendChild(br)
+        }
+
+        if (value == "submit") {
+            var submit = document.createElement("input");
+            submit.setAttribute("type", "submit");
+            submit.setAttribute("id", "submit");
+            submit.setAttribute("name", "submit");
+            submit.setAttribute("value", "submit");
+            Form.appendChild(submit);
+        }
+
+    }
+
+
+
+</script>
+
+</html>

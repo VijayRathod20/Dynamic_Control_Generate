@@ -1,6 +1,7 @@
 const selectQuery = require("../repository/queries");
 const userModel = require("../models").user;
 console.log(userModel);
+const RequestIp = require("request-ip");
 
 const addSelectName = async (req, res) => {
   const select_name = req.body;
@@ -48,8 +49,9 @@ const getSelect = async (req, res) => {
 };
 
 const getSelectedOption = async (req, res) => {
+  var clientIp = RequestIp.getClientIp(req);
+  console.log(clientIp);
   const sid = req.query.sid;
-  console.log("sid", sid);
   const type = req.query.type;
   const data = await selectQuery.getSelectedOption(sid);
   const multiSelect = req.query.multiSelect || "";
